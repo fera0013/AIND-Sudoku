@@ -6,7 +6,9 @@ boxes = PySudoku.cross(PySudoku.rows, PySudoku.digits)
 row_units = [PySudoku.cross(r, PySudoku.digits) for r in PySudoku.rows]
 column_units = [PySudoku.cross(PySudoku.rows, c) for c in PySudoku.digits]
 square_units = [PySudoku.cross(rs, cs) for rs in ('ABC','DEF','GHI') for cs in ('123','456','789')]
-unitlist = row_units + column_units + square_units
+diagonal_units_1 = [row+PySudoku.digits[i] for i,row in enumerate(PySudoku.rows)]
+diagonal_units_2 = [row+PySudoku.digits[i] for i,row in enumerate(PySudoku.rows[::-1])]
+unitlist = row_units + column_units + square_units + [diagonal_units_1 , diagonal_units_2]
 units = dict((s, [u for u in unitlist if s in u]) for s in boxes)
 peers = dict((s, set(sum(units[s],[]))-set([s])) for s in boxes)
 
