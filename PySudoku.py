@@ -1,10 +1,17 @@
 import sys, os, random, pygame
+import itertools
+
 sys.path.append(os.path.join("objects"))
 import SudokuSquare
 from GameResources import *
 
+def cross(A, B):
+    "Cross product of elements in A and elements in B."
+    return [s+t for s in A for t in B]
+  
 digits = '123456789'
 rows = 'ABCDEFGHI'
+
 
 
 def play(values_list):
