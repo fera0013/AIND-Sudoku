@@ -3,11 +3,11 @@
 
 # Question 1 (Naked Twins)
 Q: How do we use constraint propagation to solve the naked twins problem?  
-A: *Student should provide answer here*
+A: "Naked twins" are two cells in a row, column or square containing the same two remaining numbers. The constraint that this pair of numbers must be reserved for the naked twins, can be propagated by removing these numbers from each common peer.
 
 # Question 2 (Diagonal Sudoku)
 Q: How do we use constraint propagation to solve the diagonal sudoku problem?  
-A: *Student should provide answer here*
+A: The diagonal Sudoku problem is solved much in the same way as the core problem by iterating over the board, detecting the terminal cells with a unique number and deleting this unique number from each peer of each terminal cell.  
 
 ### Install
 
