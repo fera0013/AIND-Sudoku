@@ -1,13 +1,19 @@
-import PySudoku 
-import itertools
+
+
+def cross(A, B):
+    "Cross product of elements in A and elements in B."
+    return [s+t for s in A for t in B]
+  
+digits = '123456789'
+rows = 'ABCDEFGHI'
 
 assignments = []
-boxes = PySudoku.cross(PySudoku.rows, PySudoku.digits)
-row_units = [PySudoku.cross(r, PySudoku.digits) for r in PySudoku.rows]
-column_units = [PySudoku.cross(PySudoku.rows, c) for c in PySudoku.digits]
-square_units = [PySudoku.cross(rs, cs) for rs in ('ABC','DEF','GHI') for cs in ('123','456','789')]
-diagonal_units_1 = [row+PySudoku.digits[i] for i,row in enumerate(PySudoku.rows)]
-diagonal_units_2 = [row+PySudoku.digits[i] for i,row in enumerate(PySudoku.rows[::-1])]
+boxes = cross(rows, digits)
+row_units = [cross(r, digits) for r in rows]
+column_units = [cross(rows, c) for c in digits]
+square_units = [cross(rs, cs) for rs in ('ABC','DEF','GHI') for cs in ('123','456','789')]
+diagonal_units_1 = [row+digits[i] for i,row in enumerate(rows)]
+diagonal_units_2 = [row+digits[i] for i,row in enumerate(rows[::-1])]
 unitlist = row_units + column_units + square_units + [diagonal_units_1 , diagonal_units_2]
 units = dict((s, [u for u in unitlist if s in u]) for s in boxes)
 peers = dict((s, set(sum(units[s],[]))-set([s])) for s in boxes)
@@ -69,8 +75,8 @@ def grid_values(grid):
     values = []
     for c in grid:
         if c == '.':
-            values.append(PySudoku.digits)
-        elif c in PySudoku.digits:
+            values.append(digits)
+        elif c in digits:
             values.append(c)
     assert len(values) == 81
     return dict(zip(boxes, values))
@@ -100,7 +106,7 @@ def eliminate(values):
 
 def only_choice(values):
     for unit in unitlist:
-        for digit in PySudoku.digits:
+        for digit in digits:
             dplaces = [box for box in unit if digit in values[box]]
             if len(dplaces) == 1:
                 values[dplaces[0]] = digit
